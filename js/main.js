@@ -27,7 +27,7 @@ function makeCases(data) {
       }
     },
     data: {
-      labels: Array.from({length: 30}, (v, k) => k+1),
+      labels: Array.from({length: filteredData[2].Daily.length}, (v, k) => k+1), // Ugly hardcode
     },
     options: {
         maintainAspectRatio: true,
