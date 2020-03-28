@@ -1,0 +1,100 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>COVID @ LATAM</title>
+  <meta name="description" content="La evolución del COVID-19 en Latinoamérica.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta property="og:url"           content="https://www.covidlatam.com.ar" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="COVID @ LATAM" />
+  <meta property="og:description"   content="La evolución del COVID-19 en Latinoamérica." />
+  <meta property="og:image"         content="https://www.covidlatam.com.ar/thumb.jpg" />
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#1c1c1c">
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <main class="bg-dark">
+
+     <!-- Load Facebook SDK for JavaScript -->
+     <div id="fb-root"></div>
+     <script>(function(d, s, id) {
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) return;
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));</script>
+
+     <section class="py-5 text-center container">
+       <div class="row py-lg-5">
+         <div class="col-lg-6 col-md-8 mx-auto">
+           <h1 class="font-weight-light text-light text-uppercase">Coronavirus @ Latam</h1>
+           <p class="lead text-muted">La evolución del COVID-19 en Latinoamérica.</p>
+               <div class="fb-share-button"
+                    data-href="https://www.covidlatam.com.ar"
+                    data-layout="button_count">
+               </div>
+         </div>
+       </div>
+     </section>
+
+     <div class="album py-5 bg-dark">
+       <div class="container-fluid">
+         <div class="row row-cols-1">
+           <div class="col">
+             <div class="card mb-4 rounded-lg shadow-sm bg-primary">
+               <div class="card-body">
+                 <canvas id="cases"></canvas>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="row">
+           <div class="col">
+             <div class="card mb-4 rounded-lg shadow-sm bg-primary">
+               <div class="card-body">
+                 <canvas id="total"></canvas>
+               </div>
+             </div>
+           </div>
+           <div class="col">
+             <div class="card mb-4 rounded-lg shadow-sm bg-primary">
+               <div class="card-body">
+                 <canvas id="capita"></canvas>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+   </main>
+
+   <footer class="text-muted py-5">
+     <div class="container">
+       <p class="mb-0">Creado por <a href="https://twitter.com/AgustinCordes">Agustín Cordes</a>.</p>
+     </div>
+   </footer>
+
+  <script src="js/vendor/modernizr-3.8.0.min.js"></script>
+  <script src="js/vendor/d3-5.15.0.min.js"></script>
+  <script src="js/vendor/chart-2.9.3.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
