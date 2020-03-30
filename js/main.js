@@ -96,7 +96,7 @@ function makeCapita(data) {
     .filter(d => Countries.indexOf(d.Country) > -1)
     .map((obj, idx) => ({ ...obj, Color: Colors[idx] }))
     .map((obj, idx) => ({ ...obj, PerCapita: Math.ceil((obj.Total / Population[idx]) * 1000000) }))
-    .sort((a, b) => a.PerCapita < b.PerCapita);
+    .sort((a, b) => a.PerCapita < b.PerCapita ? 1 : -1);
 
   const countryLabels = filteredData.map(d => d.Country);
   const filteredCases = filteredData.map(d => d.PerCapita);
@@ -137,7 +137,7 @@ function makeTotal(data) {
   const filteredData = data
     .filter(d => Countries.indexOf(d.Country) > -1)
     .map((obj, idx) => ({ ...obj, Color: Colors[idx] }))
-    .sort((a, b) => a.Total < b.Total);
+    .sort((a, b) => a.Total < b.Total ? 1 : -1);
 
   const countryLabels = filteredData.map(d => d.Country);
   const filteredCases = filteredData.map(d => d.Total);
