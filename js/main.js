@@ -3,7 +3,7 @@ var Countries = ['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Ecuador
 var Colors = ['#66FF66', '#C95A49', '#FF00CC', '#50BFE6', '#FF9933', '#FF355E', '#FFFF66',
               '#44D7A8', '#FEFEFA', '#CCFF00', '#DB91EF']
 
-var Population = [43132000, 204519000, 11005000, 18006000, 48218000, 16279000, 121006000, 7003000, 32153000, 3310000, 30620000];
+var Population = [43132000, 11005000, 204519000, 18006000, 48218000, 16279000, 121006000, 7003000, 32153000, 3310000, 30620000];
 
 function makeCases(data) {
   const filteredData = data
@@ -14,28 +14,26 @@ function makeCases(data) {
   const filteredCases = filteredData.map(d => d.PerCapita);
   const filteredColors = filteredData.map(d => d.Color);
 
+  Chart.defaults.global.defaultFontColor = '#6c757d';
+  Chart.defaults.global.defaultFontSize = 14;
+  Chart.Legend.prototype.afterFit = function() {
+    this.height = this.height + 20;
+  };
+
   var chart = new Chart('cases', {
     type: "line",
-    options: {
-      maintainAspectRatio: true,
-      title: {
-          display: true,
-          text: 'Casos confirmados'
-      },
-      legend: {
-        display: false
-      }
-    },
     data: {
-      labels: Array.from({length: filteredData[2].Daily.length}, (v, k) => k+1), // Ugly hardcode
+      labels: Array.from({length: filteredData[2].Daily.length}, (v, k) => k + 1), // Ugly hardcode
     },
     options: {
-        maintainAspectRatio: true,
-        aspectRatio: 1.5,
+        maintainAspectRatio: false,
+        aspectRatio: 0.4,
         responsive: true,
         title: {
           display: true,
-          text: 'Casos confirmados'
+          text: 'EVOLUCION DE CASOS',
+          fontColor: '#f8f9fa',
+          fontSize: 16
         },
         tooltips: {
           mode: 'point',
@@ -51,7 +49,9 @@ function makeCases(data) {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Días'
+              labelString: 'Días',
+              fontColor: '#f8f9fa',
+              fontSize: 16
             },
             gridLines: {
               display:false
@@ -68,7 +68,9 @@ function makeCases(data) {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Casos'
+              labelString: 'Casos',
+              fontColor: '#f8f9fa',
+              fontSize: 16
             }
           }]
         }
@@ -93,7 +95,7 @@ function makeCapita(data) {
   const filteredData = data
     .filter(d => Countries.indexOf(d.Country) > -1)
     .map((obj, idx) => ({ ...obj, Color: Colors[idx] }))
-    .map((obj, idx) => ({ ...obj, PerCapita: (obj.Total / Population[idx]) * 100 }))
+    .map((obj, idx) => ({ ...obj, PerCapita: Math.ceil((obj.Total / Population[idx]) * 1000000) }))
     .sort((a, b) => a.PerCapita < b.PerCapita);
 
   const countryLabels = filteredData.map(d => d.Country);
@@ -108,7 +110,9 @@ function makeCapita(data) {
       responsive: true,
       title: {
           display: true,
-          text: 'Casos per capita'
+          text: 'CASOS POR MILLON DE HABITANTES',
+          fontColor: '#f8f9fa',
+          fontSize: 16
       },
       legend: {
         display: false
@@ -147,7 +151,9 @@ function makeTotal(data) {
       responsive: true,
       title: {
           display: true,
-          text: 'Casos totales'
+          text: 'CASOS TOTALES',
+          fontColor: '#f8f9fa',
+          fontSize: 16
       },
       legend: {
         display: false
