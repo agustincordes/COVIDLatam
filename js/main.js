@@ -185,12 +185,50 @@ d3
     var dailyData = d3.map(data, function(d){return(d.group)}).values().slice(4); // Trim all data until dates begin
     dailyData = dailyData.map(Number).filter(Number);
 
+    // PARCHES
+
+    // La tabla oficial de John Hopkins tiene un error en los datos, falta un reporte. Este parche lo corrige según datos del gobierno de Argentina.
     if (data['Country/Region'] == 'Argentina') {
-      // La tabla oficial de John Hopkins tiene un error en los datos, falta un reporte. Este parche lo corrige según datos del gobierno de Argentina.
+
       dailyData[21] = dailyData[20];
       dailyData[20] = dailyData[19];
       dailyData[19] = 225; // Este es el reporte faltante
-      console.log(dailyData);
+    }
+
+    // Agrego los últimos reportes a mano por ahora, pero la idea es escribir un scrapper para bajar los datos de último momento de www.worldometers.info
+
+    if (data['Country/Region'] == 'Argentina') {
+      dailyData[dailyData.length] = 820;
+    }
+    else if (data['Country/Region'] == 'Bolivia') {
+      dailyData[dailyData.length] = 97;
+    }
+    else if (data['Country/Region'] == 'Brazil') {
+      dailyData[dailyData.length] = 4579;
+    }
+    else if (data['Country/Region'] == 'Chile') {
+      dailyData[dailyData.length] = 2449;
+    }
+    else if (data['Country/Region'] == 'Colombia') {
+      dailyData[dailyData.length] = 798;
+    }
+    else if (data['Country/Region'] == 'Ecuador') {
+      dailyData[dailyData.length] = 1962;
+    }
+    else if (data['Country/Region'] == 'Mexico') {
+      dailyData[dailyData.length] = 993;
+    }
+    else if (data['Country/Region'] == 'Paraguay') {
+      dailyData[dailyData.length] = 64;
+    }
+    else if (data['Country/Region'] == 'Peru') {
+      dailyData[dailyData.length] = 950;
+    }
+    else if (data['Country/Region'] == 'Uruguay') {
+      dailyData[dailyData.length] = 310;
+    }
+    else if (data['Country/Region'] == 'Venezuela') {
+      dailyData[dailyData.length] = 135;
     }
 
     return {
