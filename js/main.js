@@ -185,6 +185,14 @@ d3
     var dailyData = d3.map(data, function(d){return(d.group)}).values().slice(4); // Trim all data until dates begin
     dailyData = dailyData.map(Number).filter(Number);
 
+    if (data['Country/Region'] == 'Argentina') {
+      // La tabla oficial de John Hopkins tiene un error en los datos, falta un reporte. Este parche lo corrige según datos del gobierno de Argentina.
+      dailyData[21] = dailyData[20];
+      dailyData[20] = dailyData[19];
+      dailyData[19] = 225; // Este es el reporte faltante
+      console.log(dailyData);
+    }
+
     return {
       Country: data['Country/Region'],
       Daily: dailyData,
