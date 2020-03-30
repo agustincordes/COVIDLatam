@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>COVID @ LATAM</title>
+  <title>CORONAVIRUS @ LATAM</title>
   <meta name="description" content="La evolución del COVID-19 en Latinoamérica.">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -35,11 +35,11 @@
        var js, fjs = d.getElementsByTagName(s)[0];
        if (d.getElementById(id)) return;
        js = d.createElement(s); js.id = id;
-       js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+       js.src = "https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.0";
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));</script>
 
-     <section class="py-5 text-center container">
+     <section class="text-center container">
        <div class="row py-lg-5">
          <div class="col-lg-6 col-md-8 mx-auto">
            <h1 class="font-weight-light text-light text-uppercase">Coronavirus @ Latam</h1>
@@ -48,12 +48,13 @@
                     data-href="https://www.covidlatam.com.ar"
                     data-layout="button_count">
                </div>
+              <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="CORONAVIRUS @ LATAM: La evolución del COVID-19 en Latinoamérica." data-url="https://www.covidlatam.com.ar" data-hashtags="Coronavirus" data-lang="es" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
          </div>
        </div>
      </section>
 
      <div class="album py-5 bg-dark">
-       <div class="container-fluid">
+       <div class="container">
          <div class="row row-cols-1">
            <div class="col">
              <div class="card mb-4 rounded-lg shadow-sm bg-primary">
@@ -84,9 +85,10 @@
 
    </main>
 
-   <footer class="text-muted py-5">
+   <footer class="text-muted text-center py-5">
      <div class="container">
-       <p class="mb-0">Creado por <a href="https://twitter.com/AgustinCordes">Agustín Cordes</a>.</p>
+       <p class="mb-0">Creado por <a href="https://twitter.com/AgustinCordes">Agustín Cordes</a>. Fuente de datos: <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a>. Código fuente del sitio: <a href="https://github.com/agustincordes/COVIDLatam">COVIDLatam</a>.</p>
+       <p class="mb-0 py-3"><em>Importante: Estos gráficos son creados a partir de reportes oficiales con <strong>casos confirmados</strong> del gobierno de cada país. Se estima que la cantidad de casos reales es mucho mayor.</em></p>
      </div>
    </footer>
 
