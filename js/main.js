@@ -198,37 +198,38 @@ d3
     // Agrego los últimos reportes a mano por ahora, pero la idea es escribir un scrapper para bajar los datos de último momento de www.worldometers.info
 
     if (data['Country/Region'] == 'Argentina') {
-      dailyData[dailyData.length] = 820;
+      dailyData[dailyData.length-1] = 966;
+      dailyData[dailyData.length] = 1054;
     }
     else if (data['Country/Region'] == 'Bolivia') {
-      dailyData[dailyData.length] = 97;
+      dailyData[dailyData.length] = 115;
     }
     else if (data['Country/Region'] == 'Brazil') {
-      dailyData[dailyData.length] = 4579;
+      //dailyData[dailyData.length] = 5812;
     }
     else if (data['Country/Region'] == 'Chile') {
-      dailyData[dailyData.length] = 2449;
+      //dailyData[dailyData.length] = 2738;
     }
     else if (data['Country/Region'] == 'Colombia') {
-      dailyData[dailyData.length] = 798;
+      //dailyData[dailyData.length] = 906;
     }
     else if (data['Country/Region'] == 'Ecuador') {
-      dailyData[dailyData.length] = 1962;
+      //dailyData[dailyData.length] = 2302;
     }
     else if (data['Country/Region'] == 'Mexico') {
-      dailyData[dailyData.length] = 993;
+      dailyData[dailyData.length] = 1215;
     }
     else if (data['Country/Region'] == 'Paraguay') {
-      dailyData[dailyData.length] = 64;
+      dailyData[dailyData.length] = 69;
     }
     else if (data['Country/Region'] == 'Peru') {
-      dailyData[dailyData.length] = 950;
+      //dailyData[dailyData.length] = 1065;
     }
     else if (data['Country/Region'] == 'Uruguay') {
-      dailyData[dailyData.length] = 310;
+      dailyData[dailyData.length] = 338;
     }
     else if (data['Country/Region'] == 'Venezuela') {
-      dailyData[dailyData.length] = 135;
+      dailyData[dailyData.length] = 143;
     }
 
     return {
