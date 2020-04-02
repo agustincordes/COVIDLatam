@@ -1,3 +1,5 @@
+// EN PROCESO: Modificando la manera en que se cargan datos, ahora preparamos un archivo JSON con datos bajados de Worldometer
+
 function makeCases(data) {
   var chart = new Chart('cases', {
     type: "line",

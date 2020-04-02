@@ -1,3 +1,5 @@
+// EN PROCESO: Scrapper de sitio Worldometer
+
 const cheerio = require('cheerio');
 const request = require('request');
 
