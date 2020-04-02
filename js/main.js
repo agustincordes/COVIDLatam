@@ -1,29 +1,8 @@
-var Countries = ['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Mexico', 'Paraguay', 'Peru', 'Uruguay', 'Venezuela'];
-
-var Colors = ['#66FF66', '#C95A49', '#FF00CC', '#50BFE6', '#FF9933', '#FF355E', '#FFFF66',
-              '#44D7A8', '#FEFEFA', '#CCFF00', '#DB91EF']
-
-var Population = [43132000, 11005000, 204519000, 18006000, 48218000, 16279000, 121006000, 7003000, 32153000, 3310000, 30620000];
-
 function makeCases(data) {
-  const filteredData = data
-    .filter(d => Countries.indexOf(d.Country) > -1)
-    .map((obj, idx) => ({ ...obj, Color: Colors[idx] }));
-
-  const countryLabels = filteredData.map(d => d.Country);
-  const filteredCases = filteredData.map(d => d.PerCapita);
-  const filteredColors = filteredData.map(d => d.Color);
-
-  Chart.defaults.global.defaultFontColor = '#6c757d';
-  Chart.defaults.global.defaultFontSize = 14;
-  Chart.Legend.prototype.afterFit = function() {
-    this.height = this.height + 20;
-  };
-
   var chart = new Chart('cases', {
     type: "line",
     data: {
-      labels: Array.from({length: filteredData[2].Daily.length}, (v, k) => k + 1), // Ugly hardcode
+      labels: Array.from({length: data[2].cases.length}, (v, k) => k + 1), // Ugly hardcode
     },
     options: {
         maintainAspectRatio: false,
@@ -57,7 +36,6 @@ function makeCases(data) {
               display:false
             },
             ticks: {
-              borderColor: filteredData[0].Color,
               userCallback: function(value, index) {
                 if (index % 2) return "";
                 return value;
@@ -77,12 +55,12 @@ function makeCases(data) {
       }
   });
 
-  for (var i = 0; i < filteredData.length; i++) {
+  for (var i = 0; i < data.length; i++) {
     var newDataset = {
-      label: filteredData[i].Country,
-      data: filteredData[i].Daily,
-      borderColor: filteredData[i].Color,
-      backgroundColor: filteredData[i].Color,
+      label: data[i].name,
+      data: data[i].cases,
+      borderColor: data[i].color,
+      backgroundColor: data[i].color,
       fill: false
     };
 
@@ -92,15 +70,15 @@ function makeCases(data) {
 }
 
 function makeCapita(data) {
+  // Calculamos los casos per capita y ordenamos de mayor a menor caso
   const filteredData = data
-    .filter(d => Countries.indexOf(d.Country) > -1)
-    .map((obj, idx) => ({ ...obj, Color: Colors[idx] }))
-    .map((obj, idx) => ({ ...obj, PerCapita: Math.ceil((obj.Total / Population[idx]) * 1000000) }))
-    .sort((a, b) => a.PerCapita < b.PerCapita ? 1 : -1);
+    .map((obj, idx) => ({ ...obj, capita: Math.ceil((obj.cases[obj.cases.length - 1] / obj.population) * 1000000) }))
+    .sort((a, b) => a.capita < b.capita ? 1 : -1);
 
-  const countryLabels = filteredData.map(d => d.Country);
-  const filteredCases = filteredData.map(d => d.PerCapita);
-  const filteredColors = filteredData.map(d => d.Color);
+  // Filtramos los datos en arrays separados para Chart.js
+  const countryLabels = filteredData.map(d => d.name);
+  const filteredCases = filteredData.map(d => d.capita);
+  const filteredColors = filteredData.map(d => d.color);
 
   var chart = new Chart('capita', {
     type: "bar",
@@ -134,14 +112,13 @@ function makeCapita(data) {
 }
 
 function makeTotal(data) {
-  const filteredData = data
-    .filter(d => Countries.indexOf(d.Country) > -1)
-    .map((obj, idx) => ({ ...obj, Color: Colors[idx] }))
-    .sort((a, b) => a.Total < b.Total ? 1 : -1);
+  // Ordenamos los países de mayor a menor caso
+  data.sort((a, b) => a.cases.slice(-1)[0] < b.cases.slice(-1)[0] ? 1 : -1);
 
-  const countryLabels = filteredData.map(d => d.Country);
-  const filteredCases = filteredData.map(d => d.Total);
-  const filteredColors = filteredData.map(d => d.Color);
+  // Filtramos los datos en arrays separados para Chart.js
+  const countryLabels = data.map(d => d.name);
+  const filteredCases = data.map(d => d.cases[d.cases.length - 1]);
+  const filteredColors = data.map(d => d.color);
 
   var chart = new Chart('total', {
     type: "horizontalBar",
@@ -174,68 +151,29 @@ function makeTotal(data) {
   });
 }
 
-function processData(data) {
-  makeCases(data);
-  makeCapita(data);
-  makeTotal(data);
+function loadJSON(callback) {
+  var xobj = new XMLHttpRequest();
+
+  xobj.overrideMimeType("application/json");
+  xobj.open('GET', 'data/countries.json', true);
+  xobj.onreadystatechange = function () {
+    if (xobj.readyState == 4 && xobj.status == "200") {
+      callback(xobj.responseText);
+    }
+  };
+  xobj.send(null);
 }
 
-d3
-  .csv("csse_covid_19_data/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv", function(data) {
-    var dailyData = d3.map(data, function(d){return(d.group)}).values().slice(4); // Trim all data until dates begin
-    dailyData = dailyData.map(Number).filter(Number);
+loadJSON(function(response) {
+  var countries = JSON.parse(response);
 
-    // PARCHES
+  Chart.defaults.global.defaultFontColor = '#6c757d';
+  Chart.defaults.global.defaultFontSize = 14;
+  Chart.Legend.prototype.afterFit = function() {
+    this.height = this.height + 20;
+  };
 
-    // La tabla oficial de John Hopkins tiene un error en los datos, falta un reporte. Este parche lo corrige según datos del gobierno de Argentina.
-    if (data['Country/Region'] == 'Argentina') {
-
-      dailyData[21] = dailyData[20];
-      dailyData[20] = dailyData[19];
-      dailyData[19] = 225; // Este es el reporte faltante
-    }
-
-    // Agrego los últimos reportes a mano por ahora, pero la idea es escribir un scrapper para bajar los datos de último momento de www.worldometers.info
-
-    if (data['Country/Region'] == 'Argentina') {
-      dailyData[dailyData.length-1] = 966;
-      dailyData[dailyData.length] = 1054;
-    }
-    else if (data['Country/Region'] == 'Bolivia') {
-      dailyData[dailyData.length] = 115;
-    }
-    else if (data['Country/Region'] == 'Brazil') {
-      //dailyData[dailyData.length] = 5812;
-    }
-    else if (data['Country/Region'] == 'Chile') {
-      //dailyData[dailyData.length] = 2738;
-    }
-    else if (data['Country/Region'] == 'Colombia') {
-      //dailyData[dailyData.length] = 906;
-    }
-    else if (data['Country/Region'] == 'Ecuador') {
-      //dailyData[dailyData.length] = 2302;
-    }
-    else if (data['Country/Region'] == 'Mexico') {
-      dailyData[dailyData.length] = 1215;
-    }
-    else if (data['Country/Region'] == 'Paraguay') {
-      dailyData[dailyData.length] = 69;
-    }
-    else if (data['Country/Region'] == 'Peru') {
-      //dailyData[dailyData.length] = 1065;
-    }
-    else if (data['Country/Region'] == 'Uruguay') {
-      dailyData[dailyData.length] = 338;
-    }
-    else if (data['Country/Region'] == 'Venezuela') {
-      dailyData[dailyData.length] = 143;
-    }
-
-    return {
-      Country: data['Country/Region'],
-      Daily: dailyData,
-      Total: dailyData[dailyData.length - 1]
-      };
-    })
-  .then(processData);
+  makeCases(countries);
+  makeCapita(countries);
+  makeTotal(countries);
+});
