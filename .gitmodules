@@ -1,3 +1,0 @@
-[submodule "csse_covid_19_data"]
-	path = csse_covid_19_data
-	url = https://github.com/CSSEGISandData/COVID-19.git
