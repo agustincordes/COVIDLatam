@@ -53,3 +53,8 @@ fs.writeFile("data/countries.json", countries, function(err) {
 	  console.log(err);
   }
 });*/
+
+/*const event = new Date('April 2, 2020');
+const jsonDate = event.toJSON();
+s = jsonDate.substring(0, jsonDate.indexOf('T'));
+console.log(jsonDate);*/

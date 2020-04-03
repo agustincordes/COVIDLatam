@@ -175,7 +175,11 @@ loadJSON(function(response) {
     this.height = this.height + 20;
   };
 
-  makeCases(countries);
-  makeCapita(countries);
-  makeTotal(countries);
+  var date = new Date(countries.site_updated);
+  var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+  document.getElementById('site_updated').textContent = date.toLocaleString("es-AR", options);
+
+  makeCases(countries.datasets);
+  makeCapita(countries.datasets);
+  makeTotal(countries.datasets);
 });
