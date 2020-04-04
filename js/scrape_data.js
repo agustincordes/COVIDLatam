@@ -27,12 +27,12 @@ request({
     if (err) return console.error(err);
 
     let $ = cheerio.load(body);
-	
-	$('div[id="newsdate2020-04-03"]').find('div[class="news_post"]').each(function (i, e) {
+
+	$('div[id="newsdate2020-04-04"]').find('div[class="news_post"]').each(function (i, e) {
 		var cases = 0;
 		var deaths = 0;
 		var report = $(this).find("strong").text();
-		
+
 		Countries.some(function(country, index) {
 			if (report.includes(country)) {
 				var filtered_report = report.substring(0, report.indexOf(country));
@@ -60,7 +60,7 @@ request({
 						console.error('Unexpected figures in report: ' + report)
 						break;
 				}
-				
+
 				if (cases || deaths) {
 					var updated = new Date(countriesData.datasets[index].updated);
 					var date_diff = dateDiffInDays(updated, today);
@@ -72,10 +72,10 @@ request({
 							if (date_diff == 1) {
 								countriesData.datasets[index].cases.push(0);
 							}
-							
+
 							const length = countriesData.datasets[index].cases.length;
 							const sum = countriesData.datasets[index].cases[length - 2] + cases;
-							
+
 							if (sum != countriesData.datasets[index].cases[length - 1]) {
 								countriesData.datasets[index].cases[length - 1] = sum;
 								console.log('Added ' + cases + ' cases to ' + countriesData.datasets[index].name);
@@ -86,16 +86,16 @@ request({
 							if (date_diff == 1) {
 								countriesData.datasets[index].deaths.push(0);
 							}
-							
+
 							const length = countriesData.datasets[index].deaths.length;
 							const sum = countriesData.datasets[index].deaths[length - 2] + deaths;
-							
+
 							if (sum != countriesData.datasets[index].deaths[length - 1]) {
 								countriesData.datasets[index].deaths[length - 1] = sum;
 								console.log('Added ' + deaths + ' deaths to ' + countriesData.datasets[index].name);
 								countriesData.datasets[index].updated = today.toJSON();
 							}
-						}						
+						}
 					}
 				}
 			}
@@ -104,7 +104,7 @@ request({
 
 	countriesData.site_updated = today.toJSON();
 	var stringify = JSON.stringify(countriesData, null, '\t');
-	fs.writeFileSync('data/countries.json', 
+	fs.writeFileSync('data/countries.json',
 		stringify.replace(/\s\s\s\s\d+,\n/g, n => n.match(/\d+/g) + ', ')
 			.replace(/\[\n\d+/g, n => '[' + n.match(/\d+/g))
 			.replace(/\s\s\s\s\d+\n\s\s\s],/g, n => n.match(/\d+/g) + '],'));
