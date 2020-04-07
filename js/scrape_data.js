@@ -28,7 +28,7 @@ request({
 
     let $ = cheerio.load(body);
 
-	$('div[id="newsdate2020-04-06"]').find('div[class="news_post"]').each(function (i, e) {
+	$('div[id="newsdate2020-04-07"]').find('div[class="news_post"]').each(function (i, e) {
 		var cases = 0;
 		var deaths = 0;
 		var report = $(this).find("strong").text();
