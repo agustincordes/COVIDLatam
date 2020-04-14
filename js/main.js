@@ -5,8 +5,8 @@ function makeCases(data) {
       labels: Array.from({length: data[2].cases.length}, (v, k) => k + 1), // Ugly hardcode
     },
     options: {
-        maintainAspectRatio: true,
-        aspectRatio: 1.4,
+        maintainAspectRatio: false,
+        //aspectRatio: 0.4,
         responsive: true,
         /*title: {
           display: true,
@@ -76,8 +76,8 @@ function makeDeaths(data) {
       labels: Array.from({length: data[0].deaths.length}, (v, k) => k + 1), // Ugly hardcode
     },
     options: {
-        maintainAspectRatio: true,
-        aspectRatio: 1.4,
+        maintainAspectRatio: false,
+        //aspectRatio: 0.4,
         responsive: true,
         /*title: {
           display: true,
