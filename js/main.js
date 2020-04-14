@@ -6,7 +6,7 @@ function makeCases(data) {
     },
     options: {
         maintainAspectRatio: true,
-        aspectRatio: 1,
+        aspectRatio: 1.4,
         responsive: true,
         /*title: {
           display: true,
@@ -77,7 +77,7 @@ function makeDeaths(data) {
     },
     options: {
         maintainAspectRatio: true,
-        aspectRatio: 1,
+        aspectRatio: 1.4,
         responsive: true,
         /*title: {
           display: true,
