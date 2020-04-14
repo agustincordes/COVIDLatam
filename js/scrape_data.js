@@ -45,7 +45,7 @@ request({
 
       var indexOf = Countries.indexOf(arr[0]);
       if (indexOf != -1) {
-        realtimeData.push({name: arr[0], cases: parseInt(arr[1].replace(/,/g, ''), 10), deaths: parseInt(arr[3].replace(/,/g, ''), 10)});
+        realtimeData.push({name: arr[0], cases: parseInt(arr[1].replace(/,/g, ''), 10), deaths: parseInt(arr[3].replace(/,/g, ''), 10), tests: parseInt(arr[10].replace(/,/g, ''), 10)});
       }
     });
 
@@ -88,6 +88,13 @@ request({
           if (!arraysEqual(countriesData.datasets[indexOf].cases, dailyData)) {
             console.log('Updating cases for ' + realtimeData[indexOf].name + '...');
             countriesData.datasets[indexOf].cases = dailyData;
+            countriesData.datasets[indexOf].updated = today.toJSON();
+            hasAnyCountryUpdated = true;
+          }
+
+          if (countriesData.datasets[indexOf].tests != realtimeData[indexOf].tests) {
+            console.log('Updating tests for ' + realtimeData[indexOf].name + '...');
+            countriesData.datasets[indexOf].tests = realtimeData[indexOf].tests;
             countriesData.datasets[indexOf].updated = today.toJSON();
             hasAnyCountryUpdated = true;
           }

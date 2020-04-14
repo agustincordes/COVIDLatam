@@ -304,6 +304,38 @@ function makeDeathsCapita(data) {
   });
 }
 
+function makeTests(data) {
+  var tableRef = document.getElementById('tests-table').getElementsByTagName('tbody')[0];
+
+  data.sort((a, b) => a.name.localeCompare(b.name));
+
+  for (var i = 0; i < data.length; i++) {
+    var newRow = tableRef.insertRow();
+
+    var newCell = newRow.insertCell();
+    newCell.innerHTML = '<strong style="color: ' + data[i].color + '">' + data[i].name + '</strong>';
+
+    var newCell = newRow.insertCell();
+    newCell.innerHTML = data[i].tests.toLocaleString('es-AR');
+
+    var newCell = newRow.insertCell();
+    newCell.innerHTML = Math.round((data[i].tests / data[i].population) * 1000000);
+
+    var newCell = newRow.insertCell();
+    var percent = Math.ceil((data[i].cases[data[i].cases.length - 1] / data[i].tests) * 100);
+
+    if (percent <= 15) {
+      newCell.innerHTML = '<strong style="color: #66FF66">' + percent + '%</strong>';
+    }
+    else if (percent > 15 && percent < 30) {
+      newCell.innerHTML = '<strong style="color: #FFFF66">' + percent + '%</strong>';
+    }
+    else {
+      newCell.innerHTML = '<strong style="color: #FF355E">' + percent + '%</strong>';
+    }
+  }
+}
+
 function loadJSON(callback) {
   var xobj = new XMLHttpRequest();
 
@@ -336,4 +368,5 @@ loadJSON(function(response) {
   makeCapita(countries.datasets);
   makeDeathsTotal(countries.datasets);
   makeDeathsCapita(countries.datasets);
+  makeTests(countries.datasets);
 });

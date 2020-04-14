@@ -53,6 +53,10 @@ html body {
  background-color: #1c1d1f !important;
 }
 
+.text-white {
+ color: #f8f9fa !important;
+}
+
 .bg-dark {
  background: #1c1d1f !important;
 }
