@@ -147,8 +147,18 @@
    </main>
 
    <footer class="text-muted text-center py-5">
+
+      <div class="container text-left">
+         <h5 class="text-light">¿Cómo se calculan los datos?</h5>
+         <p class="text-secondary">Se descargan automáticamente las últimas tablas con reportes de la universidad de <a href="https://github.com/CSSEGISandData/COVID-19">John Hopkins</a>. A estos datos se les aplican unas correcciones en base a noticias locales debido a ligeras inconsistencias, como ser días con reportes repetidos. Luego, se extraen los últimos datos en tiempo real de <a href="https://www.worldometers.info/coronavirus">Worldometer</a> y se agregan a los reportes de John Hopkins.
+         <h5 class="text-light">¿Los datos son rigurosos?</h5>
+         <p class="text-secondary">Es importante entender que todos estos datos están basados en reportes oficiales de cada país. Nadie sabe cuántos casos reales de coronavirus hay en total, nomás pueden estimarse, por eso el interés en seguir la progresión del contagio en base a datos estadísticos, de manera similar a cómo funcionan las encuestas. Las curvas en sí son rigurosas y se revisan manualmente a diario. Sólo pueden perder algo de precisión en el último día graficado debido a la actualización en tiempo real.</p>
+         <h5 class="text-light">¿Cómo se programó el sitio web?</h5>
+         <p class="text-secondary">Es una web estática muy sencilla basada en HTML5 y Javascript que reside en <a href="https://www.netlify.com">Netlify.com</a>. Hace uso de las tecnologías <a href="https://getbootstrap.com">Bootstrap</a>, <a href="https://fontawesome.com">Font Awesome</a> y <a href="https://jquery.com">JQuery</a>, además de la librería <a href="https://www.chartjs.org">Chart.js</a> para graficar curvas. Del proceso mencionado anteriormente resulta un archivo JSON que se usa para graficar las curvas y barras. Este archivo JSON se genera con un script Node.js que hace uso de las librerías <a href="https://d3js.org">D3</a> y <a href="https://cheerio.js.org">Cheerio</a> para extraer los datos de John Hopkins y Worldometer respectivamente. El código fuente del sitio es 100% público.</p>
+     </div>
+
      <div class="container">
-       <p class="mb-0">Creado por <a href="https://twitter.com/AgustinCordes">Agustín Cordes</a>. Fuente de datos: <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a> y <a href="https://www.worldometers.info/coronavirus/">Worldometer</a>. Código fuente del sitio: <a href="https://github.com/agustincordes/COVIDLatam">COVIDLatam</a>.</p>
+       <p class="mt-5 mb-0">Creado por <a href="https://twitter.com/AgustinCordes">Agustín Cordes</a>. Fuente de datos: <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a> y <a href="https://www.worldometers.info/coronavirus">Worldometer</a>. Código fuente del sitio: <a href="https://github.com/agustincordes/COVIDLatam">COVIDLatam</a>.</p>
      </div>
    </footer>
 
