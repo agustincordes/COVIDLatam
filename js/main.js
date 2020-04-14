@@ -5,15 +5,15 @@ function makeCases(data) {
       labels: Array.from({length: data[2].cases.length}, (v, k) => k + 1), // Ugly hardcode
     },
     options: {
-        maintainAspectRatio: false,
-        aspectRatio: 0.4,
+        maintainAspectRatio: true,
+        aspectRatio: 1,
         responsive: true,
-        title: {
+        /*title: {
           display: true,
           text: 'EVOLUCION DE CASOS',
           fontColor: '#f8f9fa',
           fontSize: 16
-        },
+        },*/
         tooltips: {
           mode: 'point',
           intersect: false,
@@ -76,15 +76,15 @@ function makeDeaths(data) {
       labels: Array.from({length: data[0].deaths.length}, (v, k) => k + 1), // Ugly hardcode
     },
     options: {
-        maintainAspectRatio: false,
-        aspectRatio: 0.4,
+        maintainAspectRatio: true,
+        aspectRatio: 1,
         responsive: true,
-        title: {
+        /*title: {
           display: true,
           text: 'EVOLUCION DE DECESOS',
           fontColor: '#f8f9fa',
           fontSize: 16
-        },
+        },*/
         tooltips: {
           mode: 'point',
           intersect: false,

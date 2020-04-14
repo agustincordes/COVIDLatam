@@ -54,15 +54,15 @@ html body {
 }
 
 .text-white {
- color: #f8f9fa !important;
+  color: #f8f9fa !important;
 }
 
 .bg-dark {
- background: #1c1d1f !important;
+  background: #1c1d1f !important;
 }
 
 .bg-primary {
- background: #0c0d0f !important;
+  background: #0c0d0f !important;
 }
 
 a, a:active, a:visited {
@@ -72,6 +72,29 @@ a, a:active, a:visited {
 a:hover {
   color: #00bfff;
   text-decoration: none;
+}
+
+.tooltip-inner {
+  color: var(--light);
+  background-color: var(--gray-dark);
+  border: 1px solid var(--gray);
+  max-width: 400px;
+}
+
+.tooltip.bs-tooltip-top .arrow:before {
+  border-top-color: var(--gray);
+}
+
+.tooltip.bs-tooltip-right .arrow:before {
+  border-right-color: var(--gray);
+}
+
+.tooltip.bs-tooltip-bottom .arrow:before {
+  border-bottom-color: var(--gray);
+}
+
+.tooltip.bs-tooltip-left .arrow:before {
+  border-left-color: var(--gray);
 }
 
 .hidden {

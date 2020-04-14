@@ -16,6 +16,7 @@
 
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
+  <script src="https://kit.fontawesome.com/d0408d2387.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
 
@@ -40,7 +41,7 @@
      }(document, 'script', 'facebook-jssdk'));</script>
 
      <section class="text-center container">
-       <div class="row py-lg-5">
+       <div class="row py-5">
          <div class="col-lg-6 col-md-8 mx-auto">
            <h1 class="font-weight-light text-light text-uppercase">Coronavirus @ Latam</h1>
            <p class="lead text-muted">La evolución del COVID-19 en Latinoamérica.</p>
@@ -52,7 +53,7 @@
          </div>
        </div>
        <div class="alert alert-info alert-dismissible fade show" role="alert">
-         <strong>Nuevo: </strong>Tests realizados y porcentaje de positividad. Actualización de datos en tiempo real. <br/> <strong>Próximamente: </strong>Más visualizaciones.
+         <strong>Nuevo: </strong>Tests realizados con índice de positividad. Actualización en tiempo real. <br/> <strong>Próximamente: </strong>Más visualizaciones.
          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -65,6 +66,7 @@
            <div class="col">
              <div class="card mb-4 rounded-lg shadow-sm bg-primary">
                <div class="card-body">
+                 <h6 class="white text-white text-center"><strong>EVOLUCION DE CASOS <i class="fas fa-info-circle" data-toggle="tooltip" title="Las curvas se calculan a partir de reportes oficiales con casos confirmados del gobierno de cada país. Se estima que la cantidad de casos reales es mucho mayor. El gráfico muestra la progresión del contagio a medida que suceden los días desde el primer caso confirmado. Es posible filtrar los países haciendo click en cada uno de ellos."></i></strong></h6>
                  <canvas id="cases"></canvas>
                </div>
              </div>
@@ -74,6 +76,7 @@
            <div class="col">
              <div class="card mb-4 rounded-lg shadow-sm bg-primary">
                <div class="card-body">
+                 <h6 class="white text-white text-center"><strong>EVOLUCION DE DECESOS <i class="fas fa-info-circle" data-toggle="tooltip" title="Similar a las curvas de casos confirmados, se grafican los decesos a medida que suceden los días a partir del primer deceso reportado."></i></strong></h6>
                  <canvas id="deaths"></canvas>
                </div>
              </div>
@@ -115,7 +118,7 @@
            <div class="col">
              <div class="card mb-4 rounded-lg shadow-sm bg-primary">
                <div class="card-body">
-                 <h6 class="white text-white text-center"><strong>TESTS REALIZADOS</strong></h1>
+                 <h6 class="white text-white text-center"><strong>TESTS REALIZADOS <i class="fas fa-info-circle" data-toggle="tooltip" title="La OMS recomienda un índice de positividad entre un 10% y 20%. Esto es la cantidad de casos confirmados que resultan de todos los tests realizados. Se muestran en color verde los índices menores a un 15%. En amarillo, aquellos entre 15% y 25%. En rojo, mayor a 25%."></i></strong></h6>
                  <table id="tests-table" class="table table-dark table-borderless table-striped bg-transparent">
                      <thead>
                       <tr class="text-secondary">
@@ -144,7 +147,6 @@
    <footer class="text-muted text-center py-5">
      <div class="container">
        <p class="mb-0">Creado por <a href="https://twitter.com/AgustinCordes">Agustín Cordes</a>. Fuente de datos: <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a> y <a href="https://www.worldometers.info/coronavirus/">Worldometer</a>. Código fuente del sitio: <a href="https://github.com/agustincordes/COVIDLatam">COVIDLatam</a>.</p>
-       <p class="mb-0 py-3"><em>Importante: Estos gráficos son creados a partir de reportes oficiales con <strong>casos confirmados</strong> del gobierno de cada país. Se estima que la cantidad de casos reales es mucho mayor.</em></p>
      </div>
    </footer>
 
@@ -156,6 +158,12 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+  </script>
 
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
