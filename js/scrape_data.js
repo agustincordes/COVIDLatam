@@ -3,6 +3,7 @@
 const fs = require('fs');
 const cheerio = require('cheerio');
 const d3 = require('d3');
+const git = require('simple-git');
 const request = require('request');
 
 const today = new Date();
@@ -22,13 +23,6 @@ function arraysEqual(a, b) {
     if (a[i] !== b[i]) return false;
   }
   return true;
-}
-
-function dateDiffInDays(a, b) {
-  const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-  const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
 
 request({
@@ -52,6 +46,9 @@ request({
     realtimeData
       .sort((a, b) => a.name.localeCompare(b.name))
       .forEach(e => console.log('\x1b[36m%s\x1b[0m | \x1b[33m%s\x1b[0m | \x1b[31m%s\x1b[0m', e.name, 'Cases: ' + e.cases, 'Deaths: ' + e.deaths));
+
+    git()
+      .submoduleUpdate(['--remote']);
 
     const casesData = fs.readFileSync('COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv', 'utf8');
     const deathsData = fs.readFileSync('COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv', 'utf8');
@@ -136,5 +133,10 @@ request({
         stringify.replace(/\s\s\s\s\d+,\n/g, n => n.match(/\d+/g) + ', ')
           .replace(/\[\n\d+/g, n => '[' + n.match(/\d+/g))
           .replace(/\s\s\s\s\d+\n\s\s\s],/g, n => n.match(/\d+/g) + '],'));
+
+      git()
+        .add('./data/countries.json')
+        .commit("Actualización de datos")
+        .push('origin', 'master', {'--recurse-submodules': 'check'});
     }
   });
