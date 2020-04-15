@@ -136,6 +136,7 @@ request({
 
       git()
         .add('./data/countries.json')
+        .add('./COVID-19')
         .commit("Actualización de datos")
         .push('origin', 'master', {'--recurse-submodules': 'check'});
     }
