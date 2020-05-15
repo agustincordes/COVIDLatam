@@ -77,23 +77,28 @@ request({
             dailyData[37] = 3995;
           }
 
-          if (dailyData[dailyData.length - 1] < realtimeData[indexOf].cases) {
-            //console.log('Adding realtime data for ' + realtimeData[indexOf].name + ': ' + realtimeData[indexOf].cases + ' cases');
-            dailyData.push(realtimeData[indexOf].cases);
-          }
+          if (realtimeData[indexOf]) {
+            if (dailyData[dailyData.length - 1] < realtimeData[indexOf].cases) {
+              //console.log('Adding realtime data for ' + realtimeData[indexOf].name + ': ' + realtimeData[indexOf].cases + ' cases');
+              dailyData.push(realtimeData[indexOf].cases);
+            }
 
-          if (!arraysEqual(countriesData.datasets[indexOf].cases, dailyData)) {
-            console.log('Updating cases for ' + realtimeData[indexOf].name + '...');
-            countriesData.datasets[indexOf].cases = dailyData;
-            countriesData.datasets[indexOf].updated = today.toJSON();
-            hasAnyCountryUpdated = true;
-          }
+            if (!arraysEqual(countriesData.datasets[indexOf].cases, dailyData)) {
+              console.log('Updating cases for ' + realtimeData[indexOf].name + '...');
+              countriesData.datasets[indexOf].cases = dailyData;
+              countriesData.datasets[indexOf].updated = today.toJSON();
+              hasAnyCountryUpdated = true;
+            }
 
-          if (countriesData.datasets[indexOf].tests != realtimeData[indexOf].tests) {
-            console.log('Updating tests for ' + realtimeData[indexOf].name + '...');
-            countriesData.datasets[indexOf].tests = realtimeData[indexOf].tests;
-            countriesData.datasets[indexOf].updated = today.toJSON();
-            hasAnyCountryUpdated = true;
+            if (countriesData.datasets[indexOf].tests != realtimeData[indexOf].tests) {
+              console.log('Updating tests for ' + realtimeData[indexOf].name + '...');
+              countriesData.datasets[indexOf].tests = realtimeData[indexOf].tests;
+              countriesData.datasets[indexOf].updated = today.toJSON();
+              hasAnyCountryUpdated = true;
+            }
+          }
+          else {
+            console.log('No realtime data for ' + indexOf + '...');
           }
         }
       });
@@ -111,16 +116,21 @@ request({
             dailyData[24] = 220;
           }
 
-          if (dailyData[dailyData.length - 1] < realtimeData[indexOf].deaths) {
-            //console.log('Adding realtime data for ' + realtimeData[indexOf].name + ': ' + realtimeData[indexOf].deaths + ' deaths');
-            dailyData.push(realtimeData[indexOf].deaths);
-          }
+          if (realtimeData[indexOf]) {
+            if (dailyData[dailyData.length - 1] < realtimeData[indexOf].deaths) {
+              //console.log('Adding realtime data for ' + realtimeData[indexOf].name + ': ' + realtimeData[indexOf].deaths + ' deaths');
+              dailyData.push(realtimeData[indexOf].deaths);
+            }
 
-          if (!arraysEqual(countriesData.datasets[indexOf].deaths, dailyData)) {
-            console.log('Updating deaths for ' + realtimeData[indexOf].name + '...');
-            countriesData.datasets[indexOf].deaths = dailyData;
-            countriesData.datasets[indexOf].updated = today.toJSON();
-            hasAnyCountryUpdated = true;
+            if (!arraysEqual(countriesData.datasets[indexOf].deaths, dailyData)) {
+              console.log('Updating deaths for ' + realtimeData[indexOf].name + '...');
+              countriesData.datasets[indexOf].deaths = dailyData;
+              countriesData.datasets[indexOf].updated = today.toJSON();
+              hasAnyCountryUpdated = true;
+            }
+          }
+          else {
+            console.log('No realtime data for ' + indexOf + '...');
           }
         }
       });
