@@ -3,4 +3,5 @@
 # Useful .gitignore templates: https://github.com/github/gitignore
 
 .DS_Store
-
+package-lock.json
+node_modules
